@@ -1,25 +1,20 @@
 package Main;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
-
-@AllArgsConstructor
 @Getter
 @Setter
+@Table(name = "students")
 @Entity
-@NoArgsConstructor
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
     private int age;
-    @ManyToOne
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")
     private Integer courseId;
 }
